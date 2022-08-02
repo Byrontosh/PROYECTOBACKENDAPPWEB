@@ -18,6 +18,7 @@ class ProfileResource extends JsonResource
         // https://laravel.com/docs/9.x/eloquent-resources#introduction
         return [
             'username' => $this->username,
+            'state'=> $this->state,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
