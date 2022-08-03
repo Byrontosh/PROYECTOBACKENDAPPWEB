@@ -73,34 +73,22 @@ class UserController extends Controller
             'home_phone' => ['required', 'numeric', 'digits:9'],
             'address' => ['required', 'string', 'min:5', 'max:50'],
         ]);
-
         // Obtiene el rol del usuario
         $role = Role::where('slug', $this->role_slug)->first();
-
-
         // Crear una instancia del usuario
         $user = new User($request->all());
-
         // Crear el password
         $temp_password = PasswordHelper::generatePassword();
-
-
         // Se setea el paasword al usuario
         $user->password = Hash::make($temp_password);
-
-
         // Se almacena el usuario en la BDD
         $role->users()->save($user);
-
-
         // Se establece si puede recibir notificaión
         if ($this->can_receive_notifications)
         {
             // Se procede a invocar la función para en envío de una notificación
             $this->sendNotifications($user, $temp_password);
         }
-
-
         // Invoca el controlador padre para la respuesta json
         return $this->sendResponse(message: 'User stored successfully');
     }
@@ -144,7 +132,7 @@ class UserController extends Controller
 
         // Guardar en la BDD
         $user->save();
-        
+
         // Mandar la notificación si en el caso del que el correo sea diferente
         if ($this->can_receive_notifications && $old_user_email !== $user->email)
         {
