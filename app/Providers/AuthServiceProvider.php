@@ -12,11 +12,23 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * The model to policy mappings for the application.
      *
-     * @var array<class-string, class-string>
+     * @var
+     * array<class-string, class-string>
      */
+
+    
+    // https://laravel.com/docs/9.x/authorization#registering-policies
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Report::class => ReportPolicy::class,
     ];
+
+
+
+
+
+
+
+
 
     /**
      * Register any authentication / authorization services.
